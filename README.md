@@ -7,8 +7,8 @@ The lib of java internationalization, includes resource bundle and db implementa
 <h3>Quick useage for the implementation java.util.ResourceBundle:</h3>
 <h5>1. Directly use pack name</h5>
 <blockquote>
-<pre><code class="java">
-//resource pack dir and pack name
+<pre><code class="java">//resource pack dir and pack name; 
+//put your resource bundle file Log.properties under your project path "openthinks/libs/i18n/resource/i18n/"
 String BASE_PACK_DIR = "openthinks/libs/i18n/resource/i18n/";
 String LOG_PACK_NAME = "Log";
 //get internationalization message by the proptiters key in bundle properties file
@@ -18,9 +18,7 @@ message = I18n.getMessage(BASE_PACK_DIR + LOG_PACK_NAME,Locale.UK, "1000");//get
 </blockquote>
 <h5>2. Use customized IBundleMessageType</h5>
 <blockquote>
-<pre>
-<code class="java">
-//define a customized message type, here is a enum;
+<pre><code class="java">//define a customized message type, here is a enum;
 //it also can be normal class just implement interface IBundleMessageType
 public enum CustomizedMessageType implements IBundleMessageType{
 	LOG, EXCEPTION, UI;
