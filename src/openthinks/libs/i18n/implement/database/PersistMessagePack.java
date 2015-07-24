@@ -48,7 +48,7 @@ public final class PersistMessagePack extends AbstractMessagePack {
 	}
 
 	/**
-	 * @param packName
+	 * @param packName String of class name
 	 */
 	public PersistMessagePack(String packName) {
 		super(packName);

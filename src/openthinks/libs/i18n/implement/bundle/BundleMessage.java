@@ -29,20 +29,20 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 import openthinks.libs.i18n.AbstractMessage;
-import openthinks.libs.i18n.IMessage;
 
 /**
  * Bundle message hold bundle file i18n message.
  * @author dailey_dai
  */
-public class BundleMessage extends AbstractMessage implements IMessage {
+public class BundleMessage extends AbstractMessage {
 	public static BundleMessage generateBundleMessage(ResourceBundle bundle, String id) {
 		BundleMessage instance = new BundleMessage(id, bundle.getString(id), bundle.getLocale());
 		return instance;
 	}
 
-	public BundleMessage(){}
-	
+	public BundleMessage() {
+	}
+
 	/**
 	 * @param id
 	 * @param content

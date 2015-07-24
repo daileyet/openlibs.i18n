@@ -29,6 +29,7 @@ import openthinks.libs.i18n.IMessagePack;
 import openthinks.libs.i18n.MessagePackManager;
 
 /**
+ * Factory of {@link BundleMessagePack}
  * @author dailey dai
  */
 public class BundleMessagePackManager extends MessagePackManager {

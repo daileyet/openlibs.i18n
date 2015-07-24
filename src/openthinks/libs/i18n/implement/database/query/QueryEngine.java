@@ -76,7 +76,7 @@ public abstract class QueryEngine {
 				@Override
 				public String query(String packName, Serializable messageId, Locale locale) {
 					String id = String.valueOf(messageId);
-					return I18n.getMessage(packName, locale, id);
+					return I18n.getResourceBundle(packName, locale).getString(id);
 				}
 
 				@Override

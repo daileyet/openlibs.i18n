@@ -68,6 +68,10 @@ public class I18nApplicationLocale extends Observable {
 		private static I18nApplicationLocale instance = new I18nApplicationLocale();
 	}
 
+	/**
+	 * get a singleton instance
+	 * @return I18nApplicationLocale
+	 */
 	public static I18nApplicationLocale getInstance() {
 		return I18nApplicationLocaleContainer.instance;
 	}

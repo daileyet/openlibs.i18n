@@ -31,7 +31,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * a simple manager for {@link IMessagePack}
+ * a simple manager and factory for {@link IMessagePack}
  * @author dailey dai
  */
 public abstract class MessagePackManager {

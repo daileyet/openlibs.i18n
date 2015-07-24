@@ -48,6 +48,9 @@ public final class I18n {
 
 	/**
 	 * get message by message pack/persist name,locale,message id and arguments.
+	 * it will check the {@link IMessageContext}, if user not call the method <BR>
+	 * {@code I18n.configurePackContext(IMessageContext messageContext)} to set a message context;<BR>
+	 * it will use the default message context {@link BundleMessageContext}
 	 * @param packName String message pack/persist name
 	 * @param locale Locale special locale
 	 * @param messageId message key id
