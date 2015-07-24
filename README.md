@@ -12,7 +12,7 @@ The lib of java internationalization, includes resource bundle and db implementa
 //under your project path "openthinks/libs/i18n/resource/i18n/"
 String BASE_PACK_DIR = "openthinks/libs/i18n/resource/i18n/";
 String LOG_PACK_NAME = "Log";
-//get internationalization message by the proptiters key in bundle properties file
+//get internationalization message by the properties key in bundle properties file
 //get default locale message
 String message = I18n.getMessage(BASE_PACK_DIR + LOG_PACK_NAME, "1000");
 //get special locale message
