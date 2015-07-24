@@ -10,13 +10,17 @@
 	href="stylesheets/github-dark.css" media="screen">
 <link rel="stylesheet" type="text/css" href="stylesheets/print.css"
 	media="print">
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/default.min.css">
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js"></script>
+<link rel="stylesheet"
+	href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/default.min.css">
+<script
+	src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js"></script>
+	<script>
+		hljs.initHighlightingOnLoad();
+	</script>
 <title>Openlibs.i18n by daileyet</title>
 </head>
 
 <body>
-	<script>hljs.initHighlightingOnLoad();</script>
 	<header>
 		<div class="container">
 			<h1>Openlibs.i18n</h1>
@@ -42,9 +46,77 @@
 					class="octicon octicon-link"></span></a>Usage
 			</h3>
 
-			<p>
-				TODO
-			</p>
+			<div>
+				<h3>Quick usage for the implementation java.util.ResourceBundle</h3> 
+				<b>1. Directly use pack name</b>
+<pre><code class="Java">//resource pack dir and pack name; 
+//put your resource bundle file Log.properties 
+//under your project path "openthinks/libs/i18n/resource/i18n/"
+String BASE_PACK_DIR = "openthinks/libs/i18n/resource/i18n/";
+String LOG_PACK_NAME = "Log";
+//get internationalization message from bundle properties file
+//get default locale message
+String message = I18n.getMessage(BASE_PACK_DIR + LOG_PACK_NAME, "1000");
+//get special locale message
+message = I18n.getMessage(BASE_PACK_DIR + LOG_PACK_NAME,Locale.UK, "1000");
+</code></pre>
+				<b>2. Use customized IBundleMessageType</b>
+<pre><code class="Java">//define a customized message type, here is a enum;
+//it also can be normal class just implement interface IBundleMessageType
+public enum CustomizedMessageType implements IBundleMessageType{
+LOG, EXCEPTION, UI;
+ @Override
+ public String value() {
+	return name() + ":" + BASE_PACK_DIR + name();
+ }
+ @Override
+ public String getPackName() {
+		//openthinks/libs/i18n/resource/i18n/LOG
+		//openthinks/libs/i18n/resource/i18n/EXCEPTION
+		//openthinks/libs/i18n/resource/i18n/UI
+		return BASE_PACK_DIR + name();
+ }
+ @Override
+ public String getMessageType() {
+		return name();
+ }
+					
+ public static final String BASE_PACK_DIR = 
+	"openthinks/libs/i18n/resource/i18n/"; 
+}
+//get default locale message
+String message = I18n.getMessage(CustomizedMessageType.LOG, "1000");
+//get special locale message
+message = I18n.getMessage(CustomizedMessageType.LOG,Locale.UK, "1000");
+</code></pre>
+				<h3>Locale change in application</h3>
+				<b>Use class I18nApplicationLocale</b>
+<pre><code class="Java">//example for Swing UI, make it as Observer 
+//and register to I18nApplicationLocale
+class UI extends JFrame implements Observer{
+ private JButton button;
+ private JLabel label;
+				 		
+ public UI(){
+	//initialize component
+	//register to I18nApplicationLocale
+	I18nApplicationLocale.getInstance().addObserver(this);
+ }				 
+ // Overrides Observer
+ public void update(Observable o, Object argument) {
+	setLocaleMessage();
+ }
+				 		
+ public void setLocaleMessage(){
+	button.setText(I18n.getMessage(CustomizedMessageType.UI,"2000"));
+	label.setText(I18n.getMessage(CustomizedMessageType.UI,"2001"));
+ }
+}
+// when the application locale changed, call the following statement
+I18nApplicationLocale.getInstance().changeCurrentLocale(Locale.UK);
+</code></pre>
+			</div>
+			
 
 			<h3>
 				<a id="designer-templates" class="anchor" href="#designer-templates"
