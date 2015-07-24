@@ -67,8 +67,7 @@ public class PersistMessageContext extends AbstractMessageContext {
 	public IMessagePack getMessagePack(IMessageType messageType) {
 		Checker.require(messageType).isExtendsFrom(IPersistMessageType.class);
 		IPersistMessageType persistMessageType = (IPersistMessageType) messageType;
-		Class<? extends IMessage> entityClass = persistMessageType
-				.getMessageEntityClass();
+		Class<? extends IMessage> entityClass = persistMessageType.getMessageEntityClass();
 		String persistName = persistMessageType.getPersistName();
 		PersistMessagePack messagePack = new PersistMessagePack();
 		messagePack.setPackName(persistName);
