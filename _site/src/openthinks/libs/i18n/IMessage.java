@@ -16,44 +16,49 @@
  * specific language governing permissions and limitations 
  * under the License. 
  * 
- * @Title: IQueryer.java 
- * @Package i18n.implement.database 
+ * @Title: IMessage.java 
+ * @Package i18n 
  * @Description: TODO
- * @author dailey 
- * @date 2012-11-2
+ * @author dailey dai 
+ * @date 2012-2-26
  * @version V1.0 
  */
-package openthinks.libs.i18n.implement.database.query;
+package openthinks.libs.i18n;
 
 import java.io.Serializable;
 import java.util.Locale;
 
-import openthinks.libs.i18n.IMessage;
-
 /**
- * @author dailey
+ * Represent every message under a locale
+ * @author dailey dai
  *
  */
-public interface IQueryer {
-
+public interface IMessage {
 	/**
-	 * query entity which implemented {@link IMessage} by message id and locale.<BR>
-	 * it is best use it when the implements is by ORM framework like Hibernate etc.
-	 * @param entityClass corresponding database table
-	 * @param messageId		message id
-	 * @param locale    message locale
-	 * @param T IMessage
-	 * @return IMessage
+	 * message unique key
+	 * @return Serializable
 	 */
-	<T extends IMessage> T query(Class<T> entityClass, Serializable messageId, Locale locale);
+	public Serializable getMessageId();
 
 	/**
-	 * query message content by tableName and message id, locale.
-	 * @param tableName table name
-	 * @param messageId message id
-	 * @param locale	message locale
+	 * message origin content for {@code getLocale()}
 	 * @return String
 	 */
-	String query(String tableName, Serializable messageId, Locale locale);
+	public String getContent();
+
+	/**
+	 * message locale
+	 * @see Locale
+	 * @return java.util.Locale
+	 */
+	public Locale getLocale();
+
+	//	/**
+	//	 * format message origin content by arguments
+	//	 * @param args arguments for message format
+	//	 * @see MessageFormat
+	//	 * @return String
+	//	 */
+	//	public String format(Object... args);
 
 }

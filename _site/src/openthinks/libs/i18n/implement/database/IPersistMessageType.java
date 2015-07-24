@@ -16,44 +16,43 @@
  * specific language governing permissions and limitations 
  * under the License. 
  * 
- * @Title: IQueryer.java 
- * @Package i18n.implement.database 
+ * @Title: IPersistMessageType.java 
+ * @Package binder 
  * @Description: TODO
  * @author dailey 
  * @date 2012-11-2
  * @version V1.0 
  */
-package openthinks.libs.i18n.implement.database.query;
-
-import java.io.Serializable;
-import java.util.Locale;
+package openthinks.libs.i18n.implement.database;
 
 import openthinks.libs.i18n.IMessage;
+import openthinks.libs.i18n.IMessageType;
+import openthinks.libs.i18n.implement.bundle.IBundleMessageType;
 
 /**
+ * Be similar to {@link IBundleMessageType}.<BR>
+ * When user retrieve persist message from database by {@link IMessageType}, there need class which implement from it. 
  * @author dailey
  *
  */
-public interface IQueryer {
+public interface IPersistMessageType extends IMessageType {
 
 	/**
-	 * query entity which implemented {@link IMessage} by message id and locale.<BR>
-	 * it is best use it when the implements is by ORM framework like Hibernate etc.
-	 * @param entityClass corresponding database table
-	 * @param messageId		message id
-	 * @param locale    message locale
-	 * @param T IMessage
-	 * @return IMessage
+	 * get entity which hold message object class type.
+	 * @return <T extends IMessage> Class<T>
 	 */
-	<T extends IMessage> T query(Class<T> entityClass, Serializable messageId, Locale locale);
+	<T extends IMessage> Class<T> getMessageEntityClass();
 
 	/**
-	 * query message content by tableName and message id, locale.
-	 * @param tableName table name
-	 * @param messageId message id
-	 * @param locale	message locale
-	 * @return String
+	 * 
+	 * @return String persist physical(table) name
 	 */
-	String query(String tableName, Serializable messageId, Locale locale);
+	String getPersistName();
+
+	/**
+	 * 
+	 * @return String message type
+	 */
+	String getMessageType();
 
 }

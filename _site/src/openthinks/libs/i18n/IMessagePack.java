@@ -16,44 +16,53 @@
  * specific language governing permissions and limitations 
  * under the License. 
  * 
- * @Title: IQueryer.java 
- * @Package i18n.implement.database 
+ * @Title: IMessagePack.java 
+ * @Package i18n 
  * @Description: TODO
- * @author dailey 
- * @date 2012-11-2
+ * @author dailey_dai 
+ * @date 2012-2-26
  * @version V1.0 
  */
-package openthinks.libs.i18n.implement.database.query;
+package openthinks.libs.i18n;
 
 import java.io.Serializable;
+import java.text.MessageFormat;
 import java.util.Locale;
 
-import openthinks.libs.i18n.IMessage;
-
 /**
- * @author dailey
+ * Hold multi-languages messages
+ * @author dailey_dai
  *
  */
-public interface IQueryer {
+public interface IMessagePack {
 
 	/**
-	 * query entity which implemented {@link IMessage} by message id and locale.<BR>
-	 * it is best use it when the implements is by ORM framework like Hibernate etc.
-	 * @param entityClass corresponding database table
-	 * @param messageId		message id
-	 * @param locale    message locale
-	 * @param T IMessage
+	 * get message pack unique name
+	 * @return String message pack name
+	 */
+	public String getPackName();
+
+	/**
+	 * set message pack unique name
+	 * @param packName String
+	 */
+	public void setPackName(String packName);
+
+	/**
+	 * get message holder by {@link Locale} and message unique key id
+	 * @param locale Locale
+	 * @param messageId message unique key
 	 * @return IMessage
 	 */
-	<T extends IMessage> T query(Class<T> entityClass, Serializable messageId, Locale locale);
-
+	public IMessage getMessage(Locale locale, Serializable messageId);
+	
 	/**
-	 * query message content by tableName and message id, locale.
-	 * @param tableName table name
-	 * @param messageId message id
-	 * @param locale	message locale
+	 * format message origin content by arguments
+	 * @param message IMessage for example {0} xx {1}.
+	 * @param args arguments for message format
+	 * @see MessageFormat
 	 * @return String
 	 */
-	String query(String tableName, Serializable messageId, Locale locale);
+	public String format(IMessage message,Object... args);
 
 }

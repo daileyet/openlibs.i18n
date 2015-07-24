@@ -16,44 +16,48 @@
  * specific language governing permissions and limitations 
  * under the License. 
  * 
- * @Title: IQueryer.java 
+ * @Title: PersistMessage.java 
  * @Package i18n.implement.database 
  * @Description: TODO
  * @author dailey 
  * @date 2012-11-2
  * @version V1.0 
  */
-package openthinks.libs.i18n.implement.database.query;
+package openthinks.libs.i18n.implement.database;
 
 import java.io.Serializable;
 import java.util.Locale;
 
-import openthinks.libs.i18n.IMessage;
+import openthinks.libs.i18n.AbstractMessage;
 
 /**
  * @author dailey
  *
  */
-public interface IQueryer {
+public class PersistMessage extends AbstractMessage {
 
 	/**
-	 * query entity which implemented {@link IMessage} by message id and locale.<BR>
-	 * it is best use it when the implements is by ORM framework like Hibernate etc.
-	 * @param entityClass corresponding database table
-	 * @param messageId		message id
-	 * @param locale    message locale
-	 * @param T IMessage
-	 * @return IMessage
+	 * 
 	 */
-	<T extends IMessage> T query(Class<T> entityClass, Serializable messageId, Locale locale);
+	public PersistMessage() {
+		super();
+	}
 
 	/**
-	 * query message content by tableName and message id, locale.
-	 * @param tableName table name
-	 * @param messageId message id
-	 * @param locale	message locale
-	 * @return String
+	 * @param id
+	 * @param content
+	 * @param locale
 	 */
-	String query(String tableName, Serializable messageId, Locale locale);
+	public PersistMessage(Serializable id, String content, Locale locale) {
+		super(id, content, locale);
+	}
+
+	/**
+	 * @param id
+	 * @param content
+	 */
+	public PersistMessage(Serializable id, String content) {
+		super(id, content);
+	}
 
 }

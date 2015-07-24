@@ -16,44 +16,58 @@
  * specific language governing permissions and limitations 
  * under the License. 
  * 
- * @Title: IQueryer.java 
- * @Package i18n.implement.database 
+ * @Title: MyBundleMessageType.java 
+ * @Package i18n.bundle 
  * @Description: TODO
  * @author dailey 
  * @date 2012-11-2
  * @version V1.0 
  */
-package openthinks.libs.i18n.implement.database.query;
+package openthinks.libs.i18n.bundle;
 
-import java.io.Serializable;
-import java.util.Locale;
-
-import openthinks.libs.i18n.IMessage;
+import openthinks.libs.i18n.implement.bundle.IBundleMessageType;
 
 /**
  * @author dailey
  *
  */
-public interface IQueryer {
+public enum MyBundleMessageType implements IBundleMessageType {
+
+	MY("my");
+
+	private String packName;
 
 	/**
-	 * query entity which implemented {@link IMessage} by message id and locale.<BR>
-	 * it is best use it when the implements is by ORM framework like Hibernate etc.
-	 * @param entityClass corresponding database table
-	 * @param messageId		message id
-	 * @param locale    message locale
-	 * @param T IMessage
-	 * @return IMessage
+	 * @param packName
 	 */
-	<T extends IMessage> T query(Class<T> entityClass, Serializable messageId, Locale locale);
+	private MyBundleMessageType(String packName) {
+		this.packName = packName;
+	}
 
-	/**
-	 * query message content by tableName and message id, locale.
-	 * @param tableName table name
-	 * @param messageId message id
-	 * @param locale	message locale
-	 * @return String
+	/* (non-Javadoc)
+	 * @see i18n.IMessageType#value()
 	 */
-	String query(String tableName, Serializable messageId, Locale locale);
+	@Override
+	public String value() {
+		return toString();
+	}
+
+	/* (non-Javadoc)
+	 * @see i18n.implement.bundle.IBundleMessageType#getPackName()
+	 */
+	@Override
+	public String getPackName() {
+		return BASE_PACK_DIR + packName;
+	}
+
+	/* (non-Javadoc)
+	 * @see i18n.implement.bundle.IBundleMessageType#getMessageType()
+	 */
+	@Override
+	public String getMessageType() {
+		return "NONE";
+	}
+
+	private static final String BASE_PACK_DIR = "openthinks/libs/i18n/bundle/";
 
 }

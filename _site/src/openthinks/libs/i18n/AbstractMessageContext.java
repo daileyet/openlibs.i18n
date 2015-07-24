@@ -16,44 +16,37 @@
  * specific language governing permissions and limitations 
  * under the License. 
  * 
- * @Title: IQueryer.java 
- * @Package i18n.implement.database 
+ * @Title: AbstractMessageContext.java 
+ * @Package i18n.implement.bundle 
  * @Description: TODO
  * @author dailey 
  * @date 2012-11-2
  * @version V1.0 
  */
-package openthinks.libs.i18n.implement.database.query;
+package openthinks.libs.i18n;
 
-import java.io.Serializable;
-import java.util.Locale;
-
-import openthinks.libs.i18n.IMessage;
 
 /**
  * @author dailey
  *
  */
-public interface IQueryer {
+public abstract class AbstractMessageContext implements IMessageContext {
+
+	protected MessagePackManager messagePackManager = null;
 
 	/**
-	 * query entity which implemented {@link IMessage} by message id and locale.<BR>
-	 * it is best use it when the implements is by ORM framework like Hibernate etc.
-	 * @param entityClass corresponding database table
-	 * @param messageId		message id
-	 * @param locale    message locale
-	 * @param T IMessage
-	 * @return IMessage
+	 * 
 	 */
-	<T extends IMessage> T query(Class<T> entityClass, Serializable messageId, Locale locale);
+	public AbstractMessageContext() {
+		super();
+	}
 
 	/**
-	 * query message content by tableName and message id, locale.
-	 * @param tableName table name
-	 * @param messageId message id
-	 * @param locale	message locale
-	 * @return String
+	 * @param messagePackManager
 	 */
-	String query(String tableName, Serializable messageId, Locale locale);
+	public AbstractMessageContext(MessagePackManager messagePackManager) {
+		super();
+		this.messagePackManager = messagePackManager;
+	}
 
 }

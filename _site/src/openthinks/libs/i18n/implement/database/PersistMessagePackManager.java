@@ -16,44 +16,30 @@
  * specific language governing permissions and limitations 
  * under the License. 
  * 
- * @Title: IQueryer.java 
+ * @Title: PersistMessagePackManager.java 
  * @Package i18n.implement.database 
  * @Description: TODO
  * @author dailey 
  * @date 2012-11-2
  * @version V1.0 
  */
-package openthinks.libs.i18n.implement.database.query;
+package openthinks.libs.i18n.implement.database;
 
-import java.io.Serializable;
-import java.util.Locale;
-
-import openthinks.libs.i18n.IMessage;
+import openthinks.libs.i18n.IMessagePack;
+import openthinks.libs.i18n.MessagePackManager;
 
 /**
  * @author dailey
  *
  */
-public interface IQueryer {
+public class PersistMessagePackManager extends MessagePackManager {
 
-	/**
-	 * query entity which implemented {@link IMessage} by message id and locale.<BR>
-	 * it is best use it when the implements is by ORM framework like Hibernate etc.
-	 * @param entityClass corresponding database table
-	 * @param messageId		message id
-	 * @param locale    message locale
-	 * @param T IMessage
-	 * @return IMessage
+	/* (non-Javadoc)
+	 * @see i18n.MessagePackManager#createMessagePack(java.lang.String)
 	 */
-	<T extends IMessage> T query(Class<T> entityClass, Serializable messageId, Locale locale);
-
-	/**
-	 * query message content by tableName and message id, locale.
-	 * @param tableName table name
-	 * @param messageId message id
-	 * @param locale	message locale
-	 * @return String
-	 */
-	String query(String tableName, Serializable messageId, Locale locale);
+	@Override
+	public IMessagePack createMessagePack(final String tableName) {
+		return new PersistMessagePack(tableName);
+	}
 
 }
