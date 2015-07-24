@@ -8,12 +8,15 @@ The lib of java internationalization, includes resource bundle and db implementa
 <h5>1. Directly use pack name</h5>
 <blockquote>
 <pre><code class="java">//resource pack dir and pack name; 
-//put your resource bundle file Log.properties under your project path "openthinks/libs/i18n/resource/i18n/"
+//put your resource bundle file Log.properties 
+//under your project path "openthinks/libs/i18n/resource/i18n/"
 String BASE_PACK_DIR = "openthinks/libs/i18n/resource/i18n/";
 String LOG_PACK_NAME = "Log";
 //get internationalization message by the proptiters key in bundle properties file
-String message = I18n.getMessage(BASE_PACK_DIR + LOG_PACK_NAME, "1000");//get default locale message
-message = I18n.getMessage(BASE_PACK_DIR + LOG_PACK_NAME,Locale.UK, "1000");//get special locale message
+//get default locale message
+String message = I18n.getMessage(BASE_PACK_DIR + LOG_PACK_NAME, "1000");
+//get special locale message
+message = I18n.getMessage(BASE_PACK_DIR + LOG_PACK_NAME,Locale.UK, "1000");
 </code></pre>
 </blockquote>
 <h5>2. Use customized IBundleMessageType</h5>
@@ -40,8 +43,10 @@ public enum CustomizedMessageType implements IBundleMessageType{
 	
 	public static final String BASE_PACK_DIR = "openthinks/libs/i18n/resource/i18n/"; 
 }
-String message = I18n.getMessage(CustomizedMessageType.LOG, "1000");//get default locale message
-message = I18n.getMessage(CustomizedMessageType.LOG,Locale.UK, "1000");//get special locale message
+//get default locale message
+String message = I18n.getMessage(CustomizedMessageType.LOG, "1000");
+//get special locale message
+message = I18n.getMessage(CustomizedMessageType.LOG,Locale.UK, "1000");
 </code>
 </pre>
 </blockquote>
