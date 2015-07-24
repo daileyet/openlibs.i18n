@@ -1,6 +1,3 @@
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/default.min.css">
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
 # openlibs.i18n
 
 The lib of java internationalization, includes resource bundle and db implementation.
