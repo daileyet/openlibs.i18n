@@ -35,8 +35,13 @@ import java.util.concurrent.locks.ReentrantLock;
  * @author dailey dai
  */
 public abstract class MessagePackManager {
-	private Map<String, IMessagePack> messagePackCache = new ConcurrentHashMap<String, IMessagePack>();
-	private Lock lock = new ReentrantLock();
+	private Map<String, IMessagePack> messagePackCache;
+	private Lock lock = null;
+
+	public MessagePackManager() {
+		messagePackCache = new ConcurrentHashMap<String, IMessagePack>();
+		lock = new ReentrantLock();
+	}
 
 	/**
 	 * Get {@link IMessagePack} by unique message pack name.

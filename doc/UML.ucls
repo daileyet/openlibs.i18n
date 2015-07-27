@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class-diagram version="1.1.8" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
-  associations="true" dependencies="false" nesting-relationships="true">  
+<class-diagram version="1.1.8" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+  realizations="true" associations="true" dependencies="true" nesting-relationships="true">  
   <interface id="1" language="java" name="openthinks.libs.i18n.IMessage" project="openlibs.i18n" 
     file="/openlibs.i18n/src/openthinks/libs/i18n/IMessage.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="125" width="184" x="3" y="148"/>    
+    <position height="125" width="184" x="3" y="115"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -12,7 +12,7 @@
   </interface>  
   <interface id="2" language="java" name="openthinks.libs.i18n.IMessageContext" project="openlibs.i18n" 
     file="/openlibs.i18n/src/openthinks/libs/i18n/IMessageContext.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="129" y="768"/>    
+    <position height="-1" width="-1" x="129" y="731"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -21,7 +21,7 @@
   </interface>  
   <interface id="3" language="java" name="openthinks.libs.i18n.IMessagePack" project="openlibs.i18n" 
     file="/openlibs.i18n/src/openthinks/libs/i18n/IMessagePack.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="135" width="238" x="2" y="362"/>    
+    <position height="135" width="238" x="2" y="325"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -30,7 +30,7 @@
   </interface>  
   <interface id="4" language="java" name="openthinks.libs.i18n.IMessageType" project="openlibs.i18n" 
     file="/openlibs.i18n/src/openthinks/libs/i18n/IMessageType.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="81" width="148" x="5" y="17"/>    
+    <position height="81" width="148" x="5" y="11"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -39,7 +39,7 @@
   </interface>  
   <class id="5" language="java" name="openthinks.libs.i18n.AbstractMessage" project="openlibs.i18n" 
     file="/openlibs.i18n/src/openthinks/libs/i18n/AbstractMessage.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="432" y="210"/>    
+    <position height="-1" width="-1" x="432" y="177"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -48,7 +48,7 @@
   </class>  
   <class id="6" language="java" name="openthinks.libs.i18n.AbstractMessageContext" project="openlibs.i18n" 
     file="/openlibs.i18n/src/openthinks/libs/i18n/AbstractMessageContext.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="448" y="762"/>    
+    <position height="-1" width="-1" x="448" y="725"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -57,7 +57,7 @@
   </class>  
   <class id="7" language="java" name="openthinks.libs.i18n.AbstractMessagePack" project="openlibs.i18n" 
     file="/openlibs.i18n/src/openthinks/libs/i18n/AbstractMessagePack.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="409" y="432"/>    
+    <position height="-1" width="-1" x="403" y="396"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -66,40 +66,48 @@
   </class>  
   <class id="8" language="java" name="openthinks.libs.i18n.MessagePackManager" project="openlibs.i18n" 
     file="/openlibs.i18n/src/openthinks/libs/i18n/MessagePackManager.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="272" y="613"/>    
+    <position height="-1" width="-1" x="272" y="576"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <association id="9">    
+  <realization id="9">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <realization id="10">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="1"/>  
+  </realization>  
+  <association id="11">    
     <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="10" name="messagePackManager"/>      
-      <multiplicity id="11" minimum="0" maximum="1"/>    
+      <attribute id="12" name="messagePackManager">        
+        <position height="0" width="0" x="0" y="-37"/>      
+      </attribute>      
+      <multiplicity id="13" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="-37"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="8" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="12">    
+  <association id="14">    
     <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="13" name="messagePackCache"/>      
-      <multiplicity id="14" minimum="0" maximum="2147483647"/>    
+      <attribute id="15" name="messagePackCache">        
+        <position height="0" width="0" x="0" y="-37"/>      
+      </attribute>      
+      <multiplicity id="16" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="-37"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="15">    
+  <realization id="17">    
     <end type="SOURCE" refId="7"/>    
     <end type="TARGET" refId="3"/>  
-  </realization>  
-  <realization id="16">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="1"/>  
-  </realization>  
-  <realization id="17">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="2"/>  
   </realization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
