@@ -42,7 +42,6 @@ import org.junit.Test;
  * 
  */
 public class I18n3TestForDB {
-
 	@Before
 	public void setUp() throws ClassNotFoundException {
 		//configure method1:
@@ -106,5 +105,4 @@ public class I18n3TestForDB {
 		String expected = "Hello";
 		Assert.assertEquals(expected, actual);
 	}
-
 }

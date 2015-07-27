@@ -41,54 +41,33 @@ public class MessageEntity extends Entity implements IMessage {
 	private String message_locale;
 	private String message_content;
 
-	/* (non-Javadoc)
-	 * @see i18n.IMessage#getContent()
-	 */
 	@Override
 	public String getContent() {
 		return message_content;
 	}
 
-	/* (non-Javadoc)
-	 * @see i18n.IMessage#getLocale()
-	 */
 	@Override
 	public Locale getLocale() {
 		return LocaleUtils.langToLocale(message_locale);
 	}
 
-	/**
-	 * @return the messageId
-	 */
 	@Override
 	public String getMessageId() {
 		return message_id;
 	}
 
-	/**
-	 * @param messageId the messageId to set
-	 */
 	public void setMessageId(String messageId) {
 		this.message_id = messageId;
 	}
 
-	/**
-	 * @param locale the locale to set
-	 */
 	public void setLocale(String locale) {
 		this.message_locale = locale;
 	}
 
-	/**
-	 * @param content the content to set
-	 */
 	public void setContent(String content) {
 		this.message_content = content;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "MessageEntity [messageId=" + message_id + ", locale=" + message_locale + ", content=" + message_content

@@ -34,7 +34,6 @@ import openthinks.libs.i18n.implement.database.IPersistMessageType;
  */
 public enum MyPersistMessageType implements IPersistMessageType {
 	ALL("message", MessageEntity.class);
-
 	private MyPersistMessageType(String tableName, Class<? extends IMessage> entityClass) {
 		this.tableName = tableName;
 		this.entityClass = entityClass;
@@ -63,5 +62,4 @@ public enum MyPersistMessageType implements IPersistMessageType {
 	public String getMessageType() {
 		return toString();
 	}
-
 }
