@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.1.8" icons="true" automaticImage="PNG" always-add-relationships="true" generalizations="true" 
   realizations="true" associations="true" dependencies="true" nesting-relationships="true">  
-  <interface id="1" language="java" name="openthinks.libs.i18n.implement.database.IPersistMessageType" 
+  <interface id="1" language="java" name="com.openthinks.libs.i18n.implement.database.IPersistMessageType" 
     project="openlibs.i18n" file="/openlibs.i18n/src/openthinks/libs/i18n/implement/database/IPersistMessageType.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="263" y="1126"/>    
@@ -11,7 +11,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="2" language="java" name="openthinks.libs.i18n.implement.database.PersistMessagePackManager" 
+  <class id="2" language="java" name="com.openthinks.libs.i18n.implement.database.PersistMessagePackManager" 
     project="openlibs.i18n" 
     file="/openlibs.i18n/src/openthinks/libs/i18n/implement/database/PersistMessagePackManager.java" binary="false" 
     corner="BOTTOM_RIGHT">    
@@ -22,7 +22,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="openthinks.libs.i18n.implement.database.PersistMessagePack" 
+  <class id="3" language="java" name="com.openthinks.libs.i18n.implement.database.PersistMessagePack" 
     project="openlibs.i18n" file="/openlibs.i18n/src/openthinks/libs/i18n/implement/database/PersistMessagePack.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="336" y="596"/>    
@@ -32,7 +32,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="openthinks.libs.i18n.implement.database.PersistMessage" project="openlibs.i18n" 
+  <class id="4" language="java" name="com.openthinks.libs.i18n.implement.database.PersistMessage" project="openlibs.i18n" 
     file="/openlibs.i18n/src/openthinks/libs/i18n/implement/database/PersistMessage.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="246" y="391"/>    
@@ -42,7 +42,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="openthinks.libs.i18n.implement.database.PersistMessageContext" 
+  <class id="5" language="java" name="com.openthinks.libs.i18n.implement.database.PersistMessageContext" 
     project="openlibs.i18n" file="/openlibs.i18n/src/openthinks/libs/i18n/implement/database/PersistMessageContext.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="261" y="953"/>    
@@ -52,7 +52,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="openthinks.libs.i18n.implement.database.query.QueryEngine" project="openlibs.i18n" 
+  <class id="6" language="java" name="com.openthinks.libs.i18n.implement.database.query.QueryEngine" project="openlibs.i18n" 
     file="/openlibs.i18n/src/openthinks/libs/i18n/implement/database/query/QueryEngine.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="3" y="791"/>    
@@ -62,7 +62,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="7" language="java" name="openthinks.libs.i18n.implement.database.query.IQueryer" 
+  <interface id="7" language="java" name="com.openthinks.libs.i18n.implement.database.query.IQueryer" 
     project="openlibs.i18n" file="/openlibs.i18n/src/openthinks/libs/i18n/implement/database/query/IQueryer.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="3" y="586"/>    
@@ -72,7 +72,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="8" language="java" name="openthinks.libs.i18n.IMessageType" project="openlibs.i18n" 
+  <interface id="8" language="java" name="com.openthinks.libs.i18n.IMessageType" project="openlibs.i18n" 
     file="/openlibs.i18n/src/openthinks/libs/i18n/IMessageType.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="924" y="1126"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
@@ -81,7 +81,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="9" language="java" name="openthinks.libs.i18n.AbstractMessage" project="openlibs.i18n" 
+  <class id="9" language="java" name="com.openthinks.libs.i18n.AbstractMessage" project="openlibs.i18n" 
     file="/openlibs.i18n/src/openthinks/libs/i18n/AbstractMessage.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="689" y="391"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
@@ -90,7 +90,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="10" language="java" name="openthinks.libs.i18n.AbstractMessagePack" project="openlibs.i18n" 
+  <class id="10" language="java" name="com.openthinks.libs.i18n.AbstractMessagePack" project="openlibs.i18n" 
     file="/openlibs.i18n/src/openthinks/libs/i18n/AbstractMessagePack.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="660" y="606"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
@@ -99,7 +99,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="11" language="java" name="openthinks.libs.i18n.MessagePackManager" project="openlibs.i18n" 
+  <class id="11" language="java" name="com.openthinks.libs.i18n.MessagePackManager" project="openlibs.i18n" 
     file="/openlibs.i18n/src/openthinks/libs/i18n/MessagePackManager.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="701" y="800"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
@@ -108,7 +108,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="12" language="java" name="openthinks.libs.i18n.AbstractMessageContext" project="openlibs.i18n" 
+  <class id="12" language="java" name="com.openthinks.libs.i18n.AbstractMessageContext" project="openlibs.i18n" 
     file="/openlibs.i18n/src/openthinks/libs/i18n/AbstractMessageContext.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="701" y="954"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 

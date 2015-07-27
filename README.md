@@ -2,6 +2,15 @@
 
 The lib of java internationalization, includes resource bundle and db implementation.
 
+###Get it by Maven
+```xml
+<dependency>
+  <groupId>com.openthinks.libs</groupId>
+  <artifactId>utilities</artifactId>
+  <version>1.0</version>
+</dependency>
+```
+
 @see http://daileyet.github.io/openlibs.i18n.
 
 ###Quick useage for the implementation java.util.ResourceBundle:
