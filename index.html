@@ -59,7 +59,7 @@ String message = I18n.getMessage(BASE_PACK_DIR + LOG_PACK_NAME, "1000");
 //get special locale message
 message = I18n.getMessage(BASE_PACK_DIR + LOG_PACK_NAME,Locale.UK, "1000");
 </code></pre>
-				<b>2. Use customized IBundleMessageType</b>
+				<b>2. Use customized <a href="doc/openthinks/libs/i18n/implement/bundle/IBundleMessageType.html">IBundleMessageType</a></b>
 <pre><code class="Java">//define a customized message type, here is a enum;
 //it also can be normal class just implement interface IBundleMessageType
 public enum CustomizedMessageType implements IBundleMessageType{
@@ -89,7 +89,7 @@ String message = I18n.getMessage(CustomizedMessageType.LOG, "1000");
 message = I18n.getMessage(CustomizedMessageType.LOG,Locale.UK, "1000");
 </code></pre>
 				<h3>Locale change in application</h3>
-				<b>Use class I18nApplicationLocale</b>
+				<b>Use class <a href="doc/openthinks/libs/i18n/I18nApplicationLocale.html">I18nApplicationLocale</a></b>
 <pre><code class="Java">//example for Swing UI, make it as Observer 
 //and register to I18nApplicationLocale
 class UI extends JFrame implements Observer{
@@ -123,7 +123,62 @@ I18nApplicationLocale.getInstance().changeCurrentLocale(Locale.UK);
 			</h3>
 
 			<p>
-				TODO
+				<section>
+					<h4>1. Message format</h4>
+					<p>Sometimes, we need to set some placeholders in localization message, so that, we can pass the parameters from code.</p>
+					<p>How to do this?
+						<ul>
+							<li>Define localization message like this in properties file:
+<pre><code class="Ini">#UI_en.properties
+#About
+about.alert.header=About
+about.alert.content=Version: {0}\nAuthor: {1}\nWebsite: {2}
+</code></pre>
+							</li>
+							<li>Pass the parameters like this:
+<pre><code class="Java">I18n.getMessage(
+CustomizedMessageType.UI,//message pack/component
+"about.alert.content", //message id
+"1.0", "Dailey Dai","http://openthinks.xyz"//message parameters
+);
+/* final format message
+Version: 1.0
+Author: Dailey Dai
+Website: http://openthinks.xyz
+ */
+</code></pre>							
+							</li>
+						</ul>
+					</p>
+				</section>
+				<section>
+					<h4>2. How to do database implementations ?</h4>
+					<p>
+						<ul>
+							<li>Prepared the table in database(mysql)
+<pre><code class="SQL">create table message(
+message_id varchar(500),
+message_locale varchar(100), 
+message_content varchar(1000)
+);
+insert into message(message_id,message_locale,message_content) 
+values("1000","zh_CN","你好");
+insert into message(message_id,message_locale,message_content) 
+values("1000","en_US","Hello");
+</code></pre>							
+							</li>
+							<li>Define the message entity to map the table(need to implement <a href="doc/openthinks/libs/i18n/IMessage.html" target="_blank">IMessage</a>)
+<pre><code class="Java"></code></pre>								
+							</li>
+							<li>Implement the <a href="doc/openthinks/libs/i18n/implement/database/query/QueryEngine.html">QueryEngine</a> from database
+<pre><code class="Java"></code></pre>								
+							</li>
+							<li>Define customized <a href="doc/openthinks/libs/i18n/implement/database/IPersistMessageType.html">IPersistMessageType</a>(option) 
+<pre><code class="Java"></code></pre></li>
+							<li>JUnit test case</li>
+						</ul>
+					</p>
+				</section>
 			</p>
 
 			<h3>
