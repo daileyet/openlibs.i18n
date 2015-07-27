@@ -59,27 +59,26 @@ String message = I18n.getMessage(BASE_PACK_DIR + LOG_PACK_NAME, "1000");
 //get special locale message
 message = I18n.getMessage(BASE_PACK_DIR + LOG_PACK_NAME,Locale.UK, "1000");
 </code></pre>
-				<b>2. Use customized <a href="doc/openthinks/libs/i18n/implement/bundle/IBundleMessageType.html">IBundleMessageType</a></b>
+				<b>2. Use customized <a href="doc/openthinks/libs/i18n/implement/bundle/IBundleMessageType.html" target="_blank">IBundleMessageType</a></b>
 <pre><code class="Java">//define a customized message type, here is a enum;
 //it also can be normal class just implement interface IBundleMessageType
 public enum CustomizedMessageType implements IBundleMessageType{
 LOG, EXCEPTION, UI;
  @Override
- public String value() {
+ public String value(){
 	return name() + ":" + BASE_PACK_DIR + name();
  }
  @Override
- public String getPackName() {
+ public String getPackName(){
 		//openthinks/libs/i18n/resource/i18n/LOG
 		//openthinks/libs/i18n/resource/i18n/EXCEPTION
 		//openthinks/libs/i18n/resource/i18n/UI
 		return BASE_PACK_DIR + name();
  }
  @Override
- public String getMessageType() {
+ public String getMessageType(){
 		return name();
  }
-					
  public static final String BASE_PACK_DIR = 
 	"openthinks/libs/i18n/resource/i18n/"; 
 }
@@ -89,7 +88,7 @@ String message = I18n.getMessage(CustomizedMessageType.LOG, "1000");
 message = I18n.getMessage(CustomizedMessageType.LOG,Locale.UK, "1000");
 </code></pre>
 				<h3>Locale change in application</h3>
-				<b>Use class <a href="doc/openthinks/libs/i18n/I18nApplicationLocale.html">I18nApplicationLocale</a></b>
+				<b>Use class <a href="doc/openthinks/libs/i18n/I18nApplicationLocale.html" target="_blank">I18nApplicationLocale</a></b>
 <pre><code class="Java">//example for Swing UI, make it as Observer 
 //and register to I18nApplicationLocale
 class UI extends JFrame implements Observer{
@@ -102,7 +101,7 @@ class UI extends JFrame implements Observer{
 	I18nApplicationLocale.getInstance().addObserver(this);
  }				 
  // Overrides Observer
- public void update(Observable o, Object argument) {
+ public void update(Observable o, Object argument){
 	setLocaleMessage();
  }
 				 		
@@ -124,7 +123,8 @@ I18nApplicationLocale.getInstance().changeCurrentLocale(Locale.UK);
 
 			<p>
 				<section>
-					<h4>1. Message format</h4>
+					<h4>1. Message format <a class="collapse" data-target="#advance_one" title="Expand/Collapse">&gt;&gt;</a></h4>
+					<div id="advance_one" class="hiden">
 					<p>Sometimes, we need to set some placeholders in localization message, so that, we can pass the parameters from code.</p>
 					<p>How to do this?
 						<ul>
@@ -150,9 +150,11 @@ Website: http://openthinks.xyz
 							</li>
 						</ul>
 					</p>
+					</div>
 				</section>
 				<section>
-					<h4>2. How to do database implementations ?</h4>
+					<h4>2. How to do database implementations ? <a class="collapse" data-target="#advance_two" title="Expand/Collapse">&gt;&gt;</a></h4>
+					<div id="advance_two" class="hiden">
 					<p>
 						<ul>
 							<li>Prepared the table in database(mysql)
@@ -168,16 +170,231 @@ values("1000","en_US","Hello");
 </code></pre>							
 							</li>
 							<li>Define the message entity to map the table(need to implement <a href="doc/openthinks/libs/i18n/IMessage.html" target="_blank">IMessage</a>)
-<pre><code class="Java"></code></pre>								
+<pre><code class="Java">import java.util.Locale;
+import openthinks.libs.i18n.IMessage;
+import openthinks.libs.sql.entity.Entity;
+import openthinks.libs.utilities.LocaleUtils;
+/**
+ * This entity solution is used my another lib <a href="//github.com/daileyet/openlibs.sql" target="_blank">openlibs.sql</a>
+ * chose your usually solution(JPA,Hibernate,JDO) to instead it.
+ */
+public class MessageEntity extends Entity 
+	implements IMessage{
+ private String message_id;//related column name in table
+ private String message_locale;
+ private String message_content;
+ @Override
+ public String getContent(){
+	return message_content;
+ }
+ @Override
+ public Locale getLocale(){
+	return LocaleUtils.langToLocale(message_locale);
+ }
+ @Override
+ public String getMessageId(){
+	return message_id;
+ }
+ public void setMessageId(String messageId){
+	this.message_id = messageId;
+ }
+ public void setLocale(String locale){
+	this.message_locale = locale;
+ }
+ public void setContent(String content){
+	this.message_content = content;
+ }
+}
+</code></pre>								
 							</li>
-							<li>Implement the <a href="doc/openthinks/libs/i18n/implement/database/query/QueryEngine.html">QueryEngine</a> from database
-<pre><code class="Java"></code></pre>								
+							<li>Implemented the <a href="doc/openthinks/libs/i18n/implement/database/query/QueryEngine.html" target="_blank">QueryEngine</a> from database
+<pre><code class="Java">import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.Locale;
+import openthinks.libs.i18n.IMessage;
+import openthinks.libs.i18n.implement.database.query.IQueryer;
+import openthinks.libs.i18n.implement.database.query.QueryEngine;
+import openthinks.libs.sql.dhibernate.Session;
+import openthinks.libs.sql.dhibernate.support.SessionFactory;
+import openthinks.libs.sql.lang.Configurator;
+import openthinks.libs.sql.lang.ConfiguratorFactory;
+/**
+ * Implemented {@link QueryEngine} by <a href="//github.com/daileyet/openlibs.sql" target="_blank">openlibs.sql</a> and JDBC
+ * You can change the solution with Hibernate,JDO and other ORM
+ */
+public class QueryEngineJDBC extends QueryEngine{
+ static{
+	QueryEngine.registerQueryEngine(new QueryEngineJDBC());
+ }
+ @Override
+ public IQueryer getQueryer(){
+	return new JDBCQueryer();
+ }
+ class JDBCQueryer implements IQueryer{
+ /**
+ * implemented by <a href="//github.com/daileyet/openlibs.sql" target="_blank">openlibs.sql</a> simple {@link Entity}
+ */
+ @Override
+ public &lt;T extends IMessage> T query(Class&lt;T> entityClass, 
+ 		Serializable messageId, Locale locale) {
+	Session session = SessionFactory.getSession();
+	String sql = "SELECT * FROM message WHERE message_id=?"
+	+" and message_locale= ?";
+	T t = session.get(entityClass, sql, 
+	new String[]{messageId.toString(),locale.toString()});
+	session.close();
+	return t;
+ }
+ /**
+ * implement by JDBC
+ */
+ @Override
+ public String query(String tableName, 
+ 		Serializable messageId, Locale locale){
+	String content = null;
+	Configurator configurator = 
+	  ConfiguratorFactory.getDefaultInstance(getClass());
+	try {
+	 Class.forName(configurator.getDriver());
+	 Connection conn = DriverManager.getConnection(
+	 	configurator.getUrl(), 
+	 	configurator.getUserName(),
+	 	configurator.getUserPwd());
+	 String sql = "SELECT * FROM " + tableName 
+	 + " WHERE message_id=? and message_locale= ?";
+	 PreparedStatement ps = conn.prepareStatement(sql);
+	 ps.setString(1, (String) messageId);
+	 ps.setString(2, locale.toString());
+	 ResultSet rs = ps.executeQuery();
+	 while (rs.next()) {
+	 content = rs.getString("message_content");
+	 }
+	 rs.close();
+	 ps.close();
+	 conn.close();
+	}catch (Exception e){
+	 e.printStackTrace();
+	}
+	return content;
+  }
+ }
+}
+</code></pre>								
 							</li>
-							<li>Define customized <a href="doc/openthinks/libs/i18n/implement/database/IPersistMessageType.html">IPersistMessageType</a>(option) 
-<pre><code class="Java"></code></pre></li>
-							<li>JUnit test case</li>
+							<li>Define customized <a href="doc/openthinks/libs/i18n/implement/database/IPersistMessageType.html" target="_blank">IPersistMessageType</a>(option) 
+<pre><code class="Java">public enum MyPersistMessageType implements IPersistMessageType{
+ ALL("message", MessageEntity.class);
+ private MyPersistMessageType(String tableName,
+ 		Class&lt;? extends IMessage> entityClass){
+	this.tableName = tableName;
+	this.entityClass = entityClass;
+ }
+ private String tableName;
+ private Class&lt;? extends IMessage> entityClass;
+ @Override
+ public String value(){
+	return toString();
+ }
+ @SuppressWarnings("unchecked")
+ @Override
+ public &lt;T extends IMessage> Class&lt;T> getMessageEntityClass(){
+	return (Class&lt;T>) entityClass;
+ }
+ @Override
+ public String getPersistName(){
+	return tableName;
+ }
+ @Override
+ public String getMessageType(){
+	return toString();
+ }
+}
+</code></pre></li>
+							<li>JUnit test case
+<pre><code>public class I18n3TestForDB{
+ @Before
+ public void setUp() throws ClassNotFoundException{
+	//configure method1:
+	I18n.configurePackContext(
+		new PersistMessageContext(
+			new QueryEngineJDBC()));
+	//configure method2:
+	Class.forName(
+		"openthinks.libs.i18n.database.QueryEngineJDBC");
+	I18n.configurePackContext(new PersistMessageContext());
+ }
+
+ @Test
+ public void testForQueryFromDB(){
+	String actual = I18n.getMessage("message", 
+		Locale.US,"1000");
+	String expected = "Hello";
+	Assert.assertEquals(expected, actual);
+
+	actual = I18n.getMessage("message", 
+		Locale.CHINA,"1000");
+	expected = "你好";
+	Assert.assertEquals(expected, actual);
+
+	actual = I18n.getMessage("message", "1000");
+	expected = "Hello";
+	if (LocaleUtils.isSame(Locale.CHINA, 
+		I18nApplicationLocale
+			.getInstance().getCurrentLocale())){
+			expected = "你好";
+	}
+	Assert.assertEquals(expected, actual);
+
+	actual = I18n.getMessage("message", "XXXX");
+	Assert.assertNull(actual);
+
+	actual = I18n.getMessage("xxx", "XXXX");
+	Assert.assertNull(actual);
+ }
+
+ @Test
+ public void testForQueryEntityClass(){
+	String actual = I18n.getMessage(MessageEntity.class, 
+		Locale.US,"1000");
+	String expected = "Hello";
+	Assert.assertEquals(expected, actual);
+
+	actual = I18n.getMessage(MessageEntity.class,
+		Locale.CHINA,"1000");
+	expected = "你好";
+	Assert.assertEquals(expected, actual);
+
+	actual = I18n.getMessage(MessageEntity.class,"1000");
+	expected = "Hello";
+	if (LocaleUtils.isSame(Locale.CHINA, 
+		I18nApplicationLocale.
+			getInstance().getCurrentLocale())){
+		expected = "你好";
+	}
+	Assert.assertEquals(expected, actual);
+
+	actual = I18n.getMessage(MessageEntity.class, "XXXX");
+	Assert.assertNull(actual);
+
+	actual = I18n.getMessage(MessageEntity.class, "XXXX");
+	Assert.assertNull(actual);
+ }
+
+ @Test
+ public void testForQueryByType(){
+	String actual = I18n.getMessage(MyPersistMessageType.ALL,
+		Locale.US,"1000");
+	String expected = "Hello";
+	Assert.assertEquals(expected, actual);
+ }
+}
+</code></pre>							</li>
 						</ul>
 					</p>
+					</div>
 				</section>
 			</p>
 
@@ -188,17 +405,15 @@ values("1000","en_US","Hello");
 			</h3>
 
 			<p>
-				<h4>1. API top level<BR><a href="images/UML.png" data-lightbox="UML" data-title="Top level"><img src="images/UML.png" width="200" height="250"/></a></h4>
-				
-				
-				<h4>2. Implementations level - Bundle<BR>
-					<a href="images/UML_Bundle.png" data-lightbox="UML_Bundle" data-title="Bundle implementation"><img src="images/UML_Bundle.png" width="200" height="250"/></a></h4>
-				
-				<h4>3. Implementations level - Database<BR>
-					<a href="images/UML_Database.png" data-lightbox="UML_Database" data-title="Database implementation""><img src="images/UML_Database.png" width="200" height="250"/></a></h4>
-				
+				<!--<h4>1. API top level<center><a href="images/UML.png" data-lightbox="UML" data-title="Top level"><img src="images/UML.png" width="200" height="250" align="center"/></a></center></h4>
+				<h4>2. Implementations level - Bundle<center><a href="images/UML_Bundle.png" data-lightbox="UML_Bundle" data-title="Bundle implementation"><img src="images/UML_Bundle.png" width="200" height="250"/></a></center></h4>
+				<h4>3. Implementations level - Database<center><a href="images/UML_Database.png" data-lightbox="UML_Database" data-title="Database implementation""><img src="images/UML_Database.png" width="200" height="250"/></a></center></h4>
+				-->
+				<a href="images/UML.png" data-lightbox="UML" data-title="API top level"><img src="images/UML.png" width="200" height="250" /></a>
+				<a href="images/UML_Bundle.png" data-lightbox="UML" data-title="Implementations level - Bundle"><img src="images/UML_Bundle.png" width="200" height="250"/></a>
+				<a href="images/UML_Database.png" data-lightbox="UML" data-title="Implementations level - Database"><img src="images/UML_Database.png" width="200" height="250"/></a>
 			</p>
-
+				
 			<h3>
 				<a id="authors-and-contributors" class="anchor"
 					href="#authors-and-contributors" aria-hidden="true"><span
@@ -222,5 +437,6 @@ values("1000","en_US","Hello");
 	</div>
 
 <script src="javascripts/lightbox-plus-jquery.min.js" ></script>
+<script src="javascripts/main.js"></script>
 </body>
 </html>

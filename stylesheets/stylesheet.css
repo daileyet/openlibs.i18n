@@ -245,3 +245,11 @@ a {
 .cf {
   zoom:1;
 }
+
+.collapse{
+	cursor: pointer;
+}
+
+.hiden{
+	display: none;
+}
