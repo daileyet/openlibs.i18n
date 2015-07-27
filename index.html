@@ -10,10 +10,9 @@
 	href="stylesheets/github-dark.css" media="screen">
 <link rel="stylesheet" type="text/css" href="stylesheets/print.css"
 	media="print">
-<link rel="stylesheet"
-	href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/default.min.css">
-<script
-	src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/default.min.css">
+<link rel="stylesheet" href="stylesheets/lightbox.css" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js"></script>
 	<script>
 		hljs.initHighlightingOnLoad();
 	</script>
@@ -134,7 +133,15 @@ I18nApplicationLocale.getInstance().changeCurrentLocale(Locale.UK);
 			</h3>
 
 			<p>
-				TODO
+				<h4>1. API top level<BR><a href="images/UML.png" data-lightbox="UML" data-title="Top level"><img src="images/UML.png" width="200" height="250"/></a></h4>
+				
+				
+				<h4>2. Implementations level - Bundle<BR>
+					<a href="images/UML_Bundle.png" data-lightbox="UML_Bundle" data-title="Bundle implementation"><img src="images/UML_Bundle.png" width="200" height="250"/></a></h4>
+				
+				<h4>3. Implementations level - Database<BR>
+					<a href="images/UML_Database.png" data-lightbox="UML_Database" data-title="Database implementation""><img src="images/UML_Database.png" width="200" height="250"/></a></h4>
+				
 			</p>
 
 			<h3>
@@ -159,6 +166,6 @@ I18nApplicationLocale.getInstance().changeCurrentLocale(Locale.UK);
 		</section>
 	</div>
 
-
+<script src="javascripts/lightbox-plus-jquery.min.js" ></script>
 </body>
 </html>
