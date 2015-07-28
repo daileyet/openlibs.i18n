@@ -253,3 +253,8 @@ a {
 .hiden{
 	display: none;
 }
+
+dl,dd{
+	font-size: 13px;
+	margin-left: 0;
+}

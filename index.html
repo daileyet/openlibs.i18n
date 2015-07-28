@@ -125,17 +125,15 @@ I18nApplicationLocale.getInstance().changeCurrentLocale(Locale.UK);
 				<section>
 					<h4>1. Message format <a class="collapse" data-target="#advance_one" title="Expand/Collapse">&gt;&gt;</a></h4>
 					<div id="advance_one" class="hiden">
-					<p>Sometimes, we need to set some placeholders in localization message, so that, we can pass the parameters from code.</p>
-					<p>How to do this?
-						<ul>
-							<li>Define localization message like this in properties file:
+					<dl> Sometimes, we need to set some placeholders in localization message, so that, we can pass the parameters from code.<BR>How to do this?
+						<dd>Define localization message like this in properties file:</dd>
 <pre><code class="Ini">#UI_en.properties
 #About
 about.alert.header=About
 about.alert.content=Version: {0}\nAuthor: {1}\nWebsite: {2}
 </code></pre>
-							</li>
-							<li>Pass the parameters like this:
+							
+							<dd>Pass the parameters like this:</dd>
 <pre><code class="Java">I18n.getMessage(
 CustomizedMessageType.UI,//message pack/component
 "about.alert.content", //message id
@@ -146,18 +144,14 @@ Version: 1.0
 Author: Dailey Dai
 Website: http://openthinks.xyz
  */
-</code></pre>							
-							</li>
-						</ul>
-					</p>
+</code></pre>		</dl>					
 					</div>
 				</section>
 				<section>
 					<h4>2. How to do database implementations ? <a class="collapse" data-target="#advance_two" title="Expand/Collapse">&gt;&gt;</a></h4>
 					<div id="advance_two" class="hiden">
-					<p>
-						<ul>
-							<li>Prepared the table in database(mysql)
+						<dl>
+							<dd>Prepared the table in database(mysql)</dd>
 <pre><code class="SQL">create table message(
 message_id varchar(500),
 message_locale varchar(100), 
@@ -168,8 +162,7 @@ values("1000","zh_CN","你好");
 insert into message(message_id,message_locale,message_content) 
 values("1000","en_US","Hello");
 </code></pre>							
-							</li>
-							<li>Define the message entity to map the table(need to implement <a href="doc/openthinks/libs/i18n/IMessage.html" target="_blank">IMessage</a>)
+							<dd>Define the message entity to map the table(need to implement <a href="doc/openthinks/libs/i18n/IMessage.html" target="_blank">IMessage</a>)</dd>
 <pre><code class="Java">import java.util.Locale;
 import openthinks.libs.i18n.IMessage;
 import openthinks.libs.sql.entity.Entity;
@@ -206,8 +199,7 @@ public class MessageEntity extends Entity
  }
 }
 </code></pre>								
-							</li>
-							<li>Implemented the <a href="doc/openthinks/libs/i18n/implement/database/query/QueryEngine.html" target="_blank">QueryEngine</a> from database
+							<dd>Implemented the <a href="doc/openthinks/libs/i18n/implement/database/query/QueryEngine.html" target="_blank">QueryEngine</a> from database</dd>
 <pre><code class="Java">import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -283,8 +275,7 @@ public class QueryEngineJDBC extends QueryEngine{
  }
 }
 </code></pre>								
-							</li>
-							<li>Define customized <a href="doc/openthinks/libs/i18n/implement/database/IPersistMessageType.html" target="_blank">IPersistMessageType</a>(option) 
+							<dd>Define customized <a href="doc/openthinks/libs/i18n/implement/database/IPersistMessageType.html" target="_blank">IPersistMessageType</a>(option)</dd> 
 <pre><code class="Java">public enum MyPersistMessageType implements IPersistMessageType{
  ALL("message", MessageEntity.class);
  private MyPersistMessageType(String tableName,
@@ -312,8 +303,8 @@ public class QueryEngineJDBC extends QueryEngine{
 	return toString();
  }
 }
-</code></pre></li>
-							<li>JUnit test case
+</code></pre>
+							<dd>JUnit test case</dd>
 <pre><code>public class I18n3TestForDB{
  @Before
  public void setUp() throws ClassNotFoundException{
@@ -391,9 +382,8 @@ public class QueryEngineJDBC extends QueryEngine{
 	Assert.assertEquals(expected, actual);
  }
 }
-</code></pre>							</li>
-						</ul>
-					</p>
+</code></pre>
+						</dl>
 					</div>
 				</section>
 			</p>
@@ -409,9 +399,9 @@ public class QueryEngineJDBC extends QueryEngine{
 				<h4>2. Implementations level - Bundle<center><a href="images/UML_Bundle.png" data-lightbox="UML_Bundle" data-title="Bundle implementation"><img src="images/UML_Bundle.png" width="200" height="250"/></a></center></h4>
 				<h4>3. Implementations level - Database<center><a href="images/UML_Database.png" data-lightbox="UML_Database" data-title="Database implementation""><img src="images/UML_Database.png" width="200" height="250"/></a></center></h4>
 				-->
-				<a href="images/UML.png" data-lightbox="UML" data-title="API top level"><img src="images/UML.png" width="200" height="250" /></a>
-				<a href="images/UML_Bundle.png" data-lightbox="UML" data-title="Implementations level - Bundle"><img src="images/UML_Bundle.png" width="200" height="250"/></a>
-				<a href="images/UML_Database.png" data-lightbox="UML" data-title="Implementations level - Database"><img src="images/UML_Database.png" width="200" height="250"/></a>
+				<a href="images/UML.png" data-lightbox="UML" data-title="API top level"><img src="images/UML_snap.gif" width="200" height="250" /></a>
+				<a href="images/UML_Bundle.png" data-lightbox="UML" data-title="Implementations level - Bundle"><img src="images/UML_Bundle_snap.gif" width="200" height="250"/></a>
+				<a href="images/UML_Database.png" data-lightbox="UML" data-title="Implementations level - Database"><img src="images/UML_Database_snap.gif" width="200" height="250"/></a>
 			</p>
 				
 			<h3>
